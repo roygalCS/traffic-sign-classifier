@@ -45,4 +45,5 @@ if __name__ == "__main__":
 
     cm = confusion_matrix(real_values, predictions)
     OUTPUTS_DIR.mkdir(exist_ok=True)
+    
     show_confusion_matrix(cm, class_names, OUTPUTS_DIR / "confusion_matrix.png")
