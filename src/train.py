@@ -44,7 +44,7 @@ def train_model(model, data_loaders, dataset_sizes, num_epochs=3):
                     if phase == "train":
                         loss.backward()
                         optimizer.step()
-                
+
                 running_loss += loss.item() * inputs.size(0)
                 running_corrects += torch.sum(preds == labels.data)
 
@@ -61,18 +61,20 @@ def train_model(model, data_loaders, dataset_sizes, num_epochs=3):
             if phase == "val" and epoch_acc > best_accuracy:
                 best_accuracy = epoch_acc
                 best_model_weights = copy.deepcopy(model.state_dict())
-        
-        print(f" epoch time: {time.time() - start:.1f}s" )
 
-        print(f"Best val accuracy: {best_accuracy:.4f}")
-        model.load_state_dict(best_model_weights)
-        return model, history
+        print(f"  epoch time: {time.time() - start:.1f}s")
+
+    print(f"Best val accuracy: {best_accuracy:.4f}")
+    model.load_state_dict(best_model_weights)
+    return model, history
 
 
 if __name__ == "__main__":
     data_loaders, dataset_sizes, class_names = get_data_loaders()
     model = create_model(len(class_names))
+
     model, history = train_model(model, data_loaders, dataset_sizes)
+
     MODELS_DIR.mkdir(exist_ok=True)
     save_path = MODELS_DIR / "base_model.pt"
     torch.save(model.state_dict(), save_path)
