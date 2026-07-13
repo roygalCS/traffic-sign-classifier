@@ -13,12 +13,12 @@ def get_predictions(model, data_loader):
     predictions, real_values = [], []
 
     with torch.no_grad():
-        for inputs, labels, in data_loader: #what the fuck is dataloader still bro 
+        for inputs, labels, in data_loader:
             inputs = inputs.to(DEVICE) 
             outputs = model(inputs)
-            _, preds = torch.max(outputs, 1) #again what is this
+            _, preds = torch.max(outputs, 1) 
 
-            predictions.extend(preds.cpu().numpy()) #why cpu, wtf is extend
+            predictions.extend(preds.cpu().numpy())
             real_values.extend(labels.numpy())
 
             return predictions, real_values
