@@ -1,6 +1,11 @@
 data/
 raw_data/
-models/*.pt
+models/
+outputs/
 __pycache__/
 *.pyc
+*.pyo
 .venv/
+*.egg-info/
+.DS_Store
+.vscode/
